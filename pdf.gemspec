@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
     Render PDFs using prince, haml and sass.
   SUMMARY
   s.email                     = "sdd@awd.ch"
-  s.executables.concat(Dir.chdir('bin') { Dir.glob('**/*') })
+  s.executables.concat(Dir.chdir('bin') { Dir.glob('**/*') }) if File.directory?('bin')
   s.files                     =
     Dir['bin/**/*'] +
     Dir['lib/**/*'] +
