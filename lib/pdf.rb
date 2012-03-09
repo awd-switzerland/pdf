@@ -5,11 +5,11 @@ class Pdf
     attr_accessor :prince_path
   end
 
-  def self.pdf_from_haml(haml, scope=nil, locals={}, &block)
-    from_haml(haml, scope, locals, &block).to_pdf_string
+  def self.pdf_from_haml(haml, scope=nil, locals={}, haml_options={}, &block)
+    from_haml(haml, scope, locals, haml_options, &block).to_pdf_string
   end
 
-  def self.from_haml(haml, scope=nil, locals={}, &block)
+  def self.from_haml(haml, scope=nil, locals={}, haml_options={}, &block)
     scope ||= Object.new
     locals  = locals.reject { |k,v|
       if k =~ /^@/ then
@@ -17,7 +17,7 @@ class Pdf
         true
       end
     }
-    new(Haml::Engine.new(haml).render(scope, locals, &block))
+    new(Haml::Engine.new(haml, haml_options).render(scope, locals, &block))
   end
 
   attr_reader :string
